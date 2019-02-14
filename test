@@ -68,7 +68,7 @@ for i in `seq 1 $NUMTHREADS`;
 
 echo "write heavy no lock" >> outputWriteHeavy.txt
 echo "Working write heavy no lock"
-for i in `seq 1 $NUMTHREADS`;
+for i in `seq 1 2`;
         do
             echo "threads =" $i >> outputWriteHeavy.txt
             for j in `seq 1 $NUMRUNS`;
