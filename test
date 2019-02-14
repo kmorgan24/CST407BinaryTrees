@@ -1,0 +1,97 @@
+#! /bin/bash
+NUMTHREADS=20
+NUMRUNS=5
+echo "default no lock" >> outputdefaults.txt
+echo "Working default no lock"
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputdefaults.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    echo "run number=" $j >> outputdefaults.txt
+                    ./main -n $i -l 0 >> outputdefaults.txt
+                done
+            
+        done  
+echo "default one lock" >> outputdefaults.txt
+echo "Working default one lock"
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputdefaults.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    ./main -n $i -l 1 >> outputdefaults.txt
+                done
+        done
+echo "default rw lock" >> outputdefaults.txt
+echo "Working default rw lock"
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputdefaults.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    ./main -n $i -l 2 >> outputdefaults.txt
+                done
+        done
+
+echo "Large tree no lock" >> outputLargeTree.txt
+echo "Working Large tree no lock"
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputLargeTree.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    ./main -n $i -l 0 -s 100000 >> outputLargeTree.txt
+                done
+            
+        done  
+echo "Large tree one lock" >> outputLargeTree.txt
+echo "Working Large tree one lock"
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputLargeTree.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    ./main -n $i -l 1 -s 100000 >> outputLargeTree.txt
+                done
+        done
+echo "large tree rw lock" >> outputLargeTree.txt
+echo "Working large tree rw lock"
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputLargeTree.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    ./main -n $i -l 2 -s 100000 >> outputLargeTree.txt
+                done
+        done
+
+echo "write heavy no lock" >> outputWriteHeavy.txt
+echo "Working write heavy no lock"
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputWriteHeavy.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    ./main -n $i -l 0 -i 250 -d 250 >> outputWriteHeavy.txt
+                done
+            
+        done  
+echo "write heavy one lock" >> outputWriteHeavy.txt
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputWriteHeavy.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    ./main -n $i -l 1 -i 250 -d 250 >> outputWriteHeavy.txt
+                done
+        done
+echo "write heavy rw lock" >> outputWriteHeavy.txt
+for i in `seq 1 $NUMTHREADS`;
+        do
+            echo "threads =" $i >> outputWriteHeavy.txt
+            for j in `seq 1 $NUMRUNS`;
+                do
+                    ./main -n $i -l 2 -i 250 -d 250 >> outputWriteHeavy.txt
+                done
+        done
