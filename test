@@ -73,7 +73,7 @@ for i in `seq 1 2`;
             echo "threads =" $i >> outputWriteHeavy.txt
             for j in `seq 1 $NUMRUNS`;
                 do
-                    ./main -n $i -l 0 -i 250 -d 250 >> outputWriteHeavy.txt
+                    ./main -n $i -l 0 -i 500 -d 50 >> outputWriteHeavy.txt
                 done
             
         done  
